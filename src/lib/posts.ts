@@ -12,7 +12,9 @@ const dir = process.env.NEXT
 const postDir = path.join(dir, "posts");
 
 export function getPostPaths(): PostPaths[] {
-  const folders = fs.readdirSync(postDir);
+  const folders = fs
+    .readdirSync(postDir)
+    .filter((folder) => folder.indexOf(".") !== 0);
   return folders.map((folder) => {
     const allPages = fs.readdirSync(path.join(postDir, folder));
     /*
