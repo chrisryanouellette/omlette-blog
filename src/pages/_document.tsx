@@ -1,4 +1,3 @@
-import { concat } from "@ouellettec/design-system";
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document(): JSX.Element {
