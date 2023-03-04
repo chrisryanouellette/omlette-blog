@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "tsc": "tsc --noemit",
     "test": "jest",
+    "ci": "yarn tsc && yarn lint && yarn test",
     "prepare": "husky install"
   },
   "dependencies": {

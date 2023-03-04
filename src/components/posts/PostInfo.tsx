@@ -1,9 +1,9 @@
-import { Blog } from "@/types";
+import { PageOneBlog } from "@/types";
 
 type PostInfoProps = {
-  title: Blog["title"];
-  date: Blog["date"];
-  summary: Blog["summary"];
+  title: PageOneBlog["title"];
+  date: PageOneBlog["date"];
+  summary: PageOneBlog["summary"];
 };
 
 export function PostInfo({ date, summary, title }: PostInfoProps): JSX.Element {
