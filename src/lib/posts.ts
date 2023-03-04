@@ -52,6 +52,8 @@ export function getMultiPagePostPaths(): PostPaths[] {
 function getMatterResult(post: string, page: string): GrayMatterFile<Buffer> {
   const filePath = path.join(postDir, post, page);
   const contents = fs.readFileSync(filePath);
+  /** @TODO Look into matter's types more to remove this any */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return matter<Buffer, any>(contents);
 }
 
