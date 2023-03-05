@@ -22,7 +22,7 @@ export default function Home({ blogs }: HomeProps): JSX.Element {
           content="A blog for omlettes to talk about their journey"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/home-page-favicon.svg" />
       </Head>
       <Header />
       <main>
@@ -38,16 +38,16 @@ export default function Home({ blogs }: HomeProps): JSX.Element {
           </div>
         ) : (
           <>
-            <div className="mx-4 sm:mx-8">
+            <div className="border-b-2 border-slate-200 px-4 pb-4 sm:border-b-0 sm:px-8 sm:pb-4">
               <FeaturedPost post={featured} />
             </div>
-            <ul className="mt-8 grid grid-cols-1 gap-8 sm:mx-8 sm:grid-cols-2 md:grid-cols-3">
+            <ul className="mt-4 grid grid-cols-1 gap-x-8 gap-y-4 sm:mx-8 sm:grid-cols-2 md:grid-cols-3">
               {rest.map((post, index) => (
                 <li
                   key={post.id}
                   className={concat(
                     index !== rest.length - 1 &&
-                      "border-b-2 border-slate-200 pb-8 sm:border-b-0 sm:pb-0"
+                      "border-b-2 border-slate-200 pb-4 sm:border-b-0 sm:pb-0"
                   )}
                 >
                   <div className="mx-4 sm:mx-0">
