@@ -13,6 +13,13 @@ if (allPosts.length) {
       expect(blog.date).toBeDefined();
     });
 
+    it.each(homePagePosts)(
+      "Page one post should have a formatted date",
+      (blog) => {
+        expect(blog.date).toMatch(/\d\d\/\d\d\/\d\d\d\d/);
+      }
+    );
+
     it.each(homePagePosts)("Page one post should have a summary", (blog) => {
       expect(blog.summary).toBeDefined();
     });
