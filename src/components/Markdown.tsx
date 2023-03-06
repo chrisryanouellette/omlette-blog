@@ -7,6 +7,8 @@ type MarkdownProps = {
 
 export function Markdown({ children }: MarkdownProps): JSX.Element {
   return (
-    <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{children}</ReactMarkdown>
+    <ReactMarkdown rehypePlugins={[rehypeHighlight]} className="markdown">
+      {children}
+    </ReactMarkdown>
   );
 }
