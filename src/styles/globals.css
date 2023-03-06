@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown h2 {
+    @apply text-2xl pb-2;
+}
+
+.markdown p {
+  @apply pb-4;
+}
+
+.markdown li {
+  @apply ml-4 list-disc pb-4;
+}
+
+.markdown img {
+    @apply mx-auto;
+}

@@ -7,6 +7,7 @@ import {
 import { Blog } from "@/types";
 import { getAllPostData, getPagePostData } from "@/lib/posts";
 import { Markdown } from "@/components/Markdown";
+import { Header } from "@/components/Header";
 
 type PostProps = {
   blog: Blog;
@@ -20,7 +21,8 @@ export default function PostPage({ blog }: PostProps): JSX.Element {
       <Head>
         <title>{title}</title>
       </Head>
-      <main>
+      <Header />
+      <main className="px-4 sm:px-8">
         <Markdown>{blog.content}</Markdown>
       </main>
     </>
