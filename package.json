@@ -9,8 +9,9 @@
     "lint": "next lint",
     "tsc": "tsc --noemit",
     "test": "jest",
-    "ci": "yarn tsc && yarn lint && yarn test && npm pkg delete scripts.prepare",
-    "prepare": "husky install"
+    "ci": "yarn tsc && yarn lint && yarn test",
+    "prepare": "husky install",
+    "unprepare": "npm pkg delete scripts.prepare"
   },
   "dependencies": {
     "@ouellettec/design-system": "^1.0.0-alpha.4",
