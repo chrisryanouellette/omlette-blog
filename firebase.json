@@ -1,7 +1,6 @@
 {
   "hosting": {
     "site": "omlettes-blog",
-    "public": "public",
     "source": ".",
     "ignore": [
       "firebase.json",
