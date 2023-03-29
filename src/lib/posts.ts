@@ -22,8 +22,8 @@ export function getPostPaths(): PostPaths[] {
     order so we sort them here
     */
     const pages = allPages.sort((a, b) => {
-      const aIndex = Number(a.replace("page.", "").replace(".md", ""));
-      const bIndex = Number(b.replace("page.", "").replace(".md", ""));
+      const aIndex = Number(a.replace("page.", "").replace(/\.md(x?)/, ""));
+      const bIndex = Number(b.replace("page.", "").replace(/\.md(x?)/, ""));
       if (aIndex < bIndex) {
         return 1;
       } else {
@@ -58,13 +58,13 @@ function getMatterResult(post: string, page: string): GrayMatterFile<Buffer> {
 }
 
 function getPostId(post: string, page: string): string {
-  return `${post}-${page.replace(/\.md$/, "")}`;
+  return `${post}-${page.replace(/\.md(x?)$/, "")}`;
 }
 
 function getPostData(
   post: string,
   page: string
-): Omit<Blog, "length" | "index"> {
+): Omit<Blog, "length" | "index" | "allPostTitles"> {
   const id = getPostId(post, page);
   const result = getMatterResult(post, page);
 
@@ -77,6 +77,7 @@ function getPostData(
     post,
     page,
     title: result.data.title,
+    pageTitle: result.data["page title"],
     content: result.content,
   };
 }
@@ -88,9 +89,14 @@ function getPageOnePostData(
   const id = getPostId(post, page);
   const result = getMatterResult(post, page);
 
-  if (!result.data.title || !result.data.date || !result.data.summary) {
+  if (
+    !result.data.title ||
+    !result.data.date ||
+    !result.data.summary ||
+    !result.data["page title"]
+  ) {
     throw new Error(
-      `Blog post ${post}/${page} is missing either the title, date, or summary.`
+      `Blog post ${post}/${page} is missing either the title, page title, date, or summary.`
     );
   }
 
@@ -107,7 +113,6 @@ function getPageOnePostData(
     title: result.data.title,
     date: result.data.date,
     summary: result.data.summary,
-    content: result.content,
     image: {
       src: result.data.image,
       alt: result.data.alt,
@@ -115,17 +120,16 @@ function getPageOnePostData(
   };
 }
 
-export function getAllPostData(): Blog[] {
+export function getAllPostData(): Pick<Blog, "post" | "title" | "index">[] {
   const multiPagePosts = getPostPaths();
-  const posts: Blog[] = [];
+  const posts: Pick<Blog, "post" | "title" | "index">[] = [];
   multiPagePosts.forEach((post) => {
     post.pages.forEach((page, index) => {
       const data = getPostData(post.post, page);
       posts.push({
-        ...data,
-        page,
+        title: data.title,
+        post: data.post,
         index: index + 1,
-        length: post.pages.length,
       });
     });
   });
@@ -135,12 +139,20 @@ export function getAllPostData(): Blog[] {
 
 export function getPagePostData(folder: string, page: string): Blog {
   const pages = fs.readdirSync(path.join(postDir, folder));
-  const index = pages.indexOf(page);
+  const index = pages.findIndex((p) => p.replace(/\.md(x?)/, "") === page);
+
+  if (index === -1) {
+    throw new Error(`Unable to find page "${page}" in dir "${folder}"`);
+  }
+
+  const data = pages.map((page) => getPostData(folder, page));
+
   return {
-    ...getPostData(folder, pages.length > 1 ? page : "page.md"),
+    ...data[index],
     page,
     index: index + 1,
     length: pages.length,
+    allPostTitles: data.map(({ pageTitle }) => pageTitle),
   };
 }
 
@@ -148,6 +160,7 @@ export function getSortedPageOnePostsData(): PageOneBlog[] {
   const postPaths = getPostPaths();
   const posts = postPaths.map((post) => {
     const data = getPageOnePostData(post.post, post.pages[0]);
+    console.log(data);
     return {
       ...data,
       index: 1,
