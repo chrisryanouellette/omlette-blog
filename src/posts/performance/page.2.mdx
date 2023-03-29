@@ -1,0 +1,43 @@
+---
+title: "A Journey into Front End Performance"
+page title: "MDN's Performance Course"
+---
+
+<Contents />
+
+# MDN's Performance Course
+
+I want to begin by reading the [web performance course](https://developer.mozilla.org/en-US/docs/Web/Performance) on MDN. I have a feeling it will be a high level overview of many different areas where performance is a consideration but it may point us into a certain direction so we can focus on a single topic from here on out. 
+
+## Performance Fundamentals
+
+- [Resource Link](https://developer.mozilla.org/en-US/docs/Web/Performance/Fundamentals)
+
+I think the fundamentals article is a good place to start. Right off the bat we define a term and an acronym. UPP, or user perceived performance, is the quality of a systems outputs ( visuals, sound, and touch ), compared to the systems inputs.
+
+### UPP Metrics
+
+First off we are given two metrics that effect UPP. Responsiveness and frame rate are two metrics that the user can directly experience. When the application is non-responsive the user feels ignored causing them to abandon the app. But, just having a fast response time is not enough, it also needs to be a smooth experience. The application may instantly start scrolling you to a bookmarked section but if it can only accomplish it at 10 - 20 fps, frames per second, then the choppy scrolling will also give the user a poor experience.
+
+Memory and power user are not directly perceived by the user but do effect UPP. If an application uses as little memory as possible then it will be constantly requesting updates re-populate states that have been removed from memory. This is backwards from a development perspective that attempts to use as little resources as possible. Instead we want to persist as much of the user's state as possible to reduce re-syncing times without effecting any of the other metrics. 
+
+Power usage is another metric that is not directly perceived by the user but if an app is to careless with how much power it consumes a user will begin to learn that the app is the reason they need to charge their phone constantly and look for less frustrating alternatives.
+
+### Startup Performance
+
+Startup performance is where we begin to focus in on the "critical path" for an application. At this stage we want to ask, "What is needed to display enough of the page that the user can begin interacting with our site." If there is a feature that does not make that list then we will want to defer, or lazily, load that feature.
+
+Anything that falls onto this critical path will be measured in three metrics,
+
+1. **First paint**, or how long it takes to show the user something.
+1. **Time till interactive**, or how long until the page is responsive to input.
+1. **Full load**, or how long it is until enough of the application has loaded that the user can accomplish what they came to the page for.
+
+For resources like database data and images that are required by the critical path, we want to load them as soon as possible. This is know as front loading and will allow us to avoid idle time. Making that DB call will take time on the back end and if the browser can begin fetching other resources or hydrating some functionality while the DB call finishes, then we avoid any amount time loss.
+
+
+## Wrapping Up
+
+The rest of the article dove into a few high level tips for achieving good performance. Instead of recapping here, we will dive deeper into each time when we come across it's associated section.
+
+<Navigation />
