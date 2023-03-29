@@ -32,7 +32,7 @@ export function FeaturedPost({ post }: PostProps): JSX.Element {
       >
         {post.image ? (
           <div className="w-full basis-3/5">
-            <PostImage alt={post.image.alt} src={post.image.src} />
+            <PostImage priority alt={post.image.alt} src={post.image.src} />
           </div>
         ) : null}
         <div className="basis-2/5">
