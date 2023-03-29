@@ -1,20 +1,32 @@
-import Head from "next/head";
 import {
   GetStaticPathsResult,
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from "next";
+import Head from "next/head";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { Blog } from "@/types";
 import { getAllPostData, getPagePostData } from "@/lib/posts";
-import { Markdown } from "@/components/Markdown";
 import { Header } from "@/components/Header";
+import { MDXComponentContext, MdxProvider } from "@/components/posts/Context";
+import * as Components from "@/components/MarkdownComponents";
 
 type PostProps = {
   blog: Blog;
+  source: MDXRemoteSerializeResult;
 };
 
-export default function PostPage({ blog }: PostProps): JSX.Element {
+export default function PostPage({ blog, source }: PostProps): JSX.Element {
   const title = `${blog.title} - Page ${blog.page} of ${blog.length} - Omlette Blogs`;
+
+  const context: MDXComponentContext = {
+    title: blog.title,
+    slug: blog.post,
+    index: blog.index,
+    length: blog.length,
+    allPostTitles: blog.allPostTitles,
+  };
 
   return (
     <>
@@ -22,9 +34,11 @@ export default function PostPage({ blog }: PostProps): JSX.Element {
         <title>{title}</title>
       </Head>
       <Header />
-      <main className="px-4 sm:px-8">
-        <Markdown>{blog.content}</Markdown>
-      </main>
+      <MdxProvider {...context}>
+        <main className="relative mx-4 sm:mx-8">
+          <MDXRemote {...source} components={Components} />
+        </main>
+      </MdxProvider>
     </>
   );
 }
@@ -43,12 +57,12 @@ export function getStaticPaths(): GetStaticPathsResult {
   };
 }
 
-export function getStaticProps({
+export async function getStaticProps({
   params,
 }: GetStaticPropsContext<{
   slug: string;
   page: string;
-}>): GetStaticPropsResult<PostProps> {
+}>): Promise<GetStaticPropsResult<PostProps>> {
   if (!params?.slug || !params.page) {
     return {
       redirect: {
@@ -58,10 +72,12 @@ export function getStaticProps({
     };
   }
 
-  const blog = getPagePostData(params.slug, `page.${params.page}.md`);
+  const blog = getPagePostData(params.slug, `page.${params.page}`);
+  const mdxSource = await serialize(blog.content);
   return {
     props: {
       blog,
+      source: mdxSource,
     },
   };
 }

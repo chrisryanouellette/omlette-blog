@@ -1,10 +1,11 @@
 import Head from "next/head";
 import { GetStaticPropsResult } from "next";
-import { concat, Icon } from "@ouellettec/design-system";
+import { Icon } from "@ouellettec/design-system";
+import { concat } from "@ouellettec/design-system/utils";
 import { PageOneBlog } from "@/types";
 import { getSortedPageOnePostsData } from "@/lib/posts";
 import { Header } from "@/components/Header";
-import { FeaturedPost, Post } from "@/components/posts";
+import { FeaturedPost, Post } from "@/components/home-page-posts";
 
 type HomeProps = {
   blogs: Readonly<PageOneBlog[]>;

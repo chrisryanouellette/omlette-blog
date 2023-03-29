@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Quicksand } from "next/font/google";
-import { concat } from "@ouellettec/design-system";
+import { concat } from "@ouellettec/design-system/utils";
 
 // eslint-disable-next-line new-cap
 const robotoMono = Quicksand({ subsets: ["latin"] });
