@@ -1,5 +1,4 @@
 # More info at https://github.com/marketplace/actions/github-action-for-yarn
-
 name: Node.js and Yarn CI
 
 on:
