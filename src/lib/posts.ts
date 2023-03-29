@@ -78,6 +78,7 @@ function getPostData(
     page,
     title: result.data.title,
     pageTitle: result.data["page title"],
+    favicon: result.data.favicon ?? "",
     content: result.content,
   };
 }
@@ -146,10 +147,12 @@ export function getPagePostData(folder: string, page: string): Blog {
   }
 
   const data = pages.map((page) => getPostData(folder, page));
+  const pageOne = data[0];
 
   return {
     ...data[index],
     page,
+    favicon: pageOne.favicon,
     index: index + 1,
     length: pages.length,
     allPostTitles: data.map(({ pageTitle }) => pageTitle),
@@ -160,7 +163,6 @@ export function getSortedPageOnePostsData(): PageOneBlog[] {
   const postPaths = getPostPaths();
   const posts = postPaths.map((post) => {
     const data = getPageOnePostData(post.post, post.pages[0]);
-    console.log(data);
     return {
       ...data,
       index: 1,

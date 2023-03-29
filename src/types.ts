@@ -1,5 +1,6 @@
 export type Blog = {
   id: string;
+  favicon: string;
   post: string;
   page: string;
   title: string;
