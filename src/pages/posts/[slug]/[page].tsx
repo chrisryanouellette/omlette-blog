@@ -32,6 +32,7 @@ export default function PostPage({ blog, source }: PostProps): JSX.Element {
     <>
       <Head>
         <title>{title}</title>
+        <link rel="icon" href={blog.favicon} />
       </Head>
       <Header />
       <MdxProvider {...context}>
