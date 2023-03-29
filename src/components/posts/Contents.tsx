@@ -44,18 +44,18 @@ export function Contents(): JSX.Element {
   return (
     <>
       <Collapse collapse={collapse}>
-        <Collapse.Trigger size="sm">
-          Blog Contents <Collapse.Carrot />
+        <Collapse.Trigger size="sm" className="mb-4 pl-4">
+          Blog Contents <Collapse.Carrot href="/remixicon.symbol.svg" />
         </Collapse.Trigger>
         <Collapse.Panel
           containerProps={{
             className:
-              "absolute mt-2 w-full sm:w-3/4 lg:w-1/2 drop-shadow-md bordered",
+              "absolute -mt-2 w-full sm:w-3/4 lg:w-1/2 drop-shadow-md border border-slate-200 z-10",
           }}
           unmountChildren={false}
         >
           <div className="px-4 py-2">
-            <p className="text-lg">Reading List</p>
+            <p className="mb-2 text-lg">Reading List</p>
             <Form form={form} onUpdate={handleChange}>
               {pages.map((index) => (
                 <Form.Item key={index} name={index.toString()} inline>

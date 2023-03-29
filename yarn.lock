@@ -913,10 +913,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@ouellettec/design-system@1.0.0-alpha.9":
-  version "1.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/@ouellettec/design-system/-/design-system-1.0.0-alpha.9.tgz#5c9d10c71511ff334a3bf6b14d679743f90b15a8"
-  integrity sha512-B9F+8Yo+U8sNne5Cr4iaht2hE+H3WFYHAFyC0fy/vTFIldbQcGSz/fnwnuqUjv4MIakw5aUhKlGfpkS6Bv7XQQ==
+"@ouellettec/design-system@1.0.0-alpha.10":
+  version "1.0.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/@ouellettec/design-system/-/design-system-1.0.0-alpha.10.tgz#69241c9ad38bba135d0d462cd696c3f97785432f"
+  integrity sha512-0DYZ6PjC8xQsla848/Kqm3g8TKtN5WlcORLZIhhJJhchb3c7pWUiHVB6wh/lIam5uxvNyZoAcbGG52Ch+6aacQ==
   dependencies:
     nookies "^2.5.2"
     react "^18.2.0"

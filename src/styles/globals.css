@@ -2,18 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-.markdown h2 {
-    @apply text-2xl pb-2;
+:root {
+  --omlette-form-item-padding-y: 0;
 }
 
-.markdown p {
+.markdown > h1 {
+  @apply pb-2 text-3xl font-semibold;
+}
+
+.markdown > h2 {
+  @apply pb-2 text-2xl;
+}
+
+.markdown > h3 {
+  @apply pb-2 text-xl;
+}
+
+.markdown > p {
   @apply pb-4;
 }
 
-.markdown li {
-  @apply ml-4 list-disc pb-4;
+.markdown ul,
+.markdown ol {
+  @apply pb-4;
 }
 
 .markdown img {
-    @apply mx-auto;
+  @apply mx-auto;
+}
+
+.markdown a {
+  @apply text-blue-700;
 }

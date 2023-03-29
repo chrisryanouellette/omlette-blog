@@ -1,13 +1,14 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 
-type PostImageProps = {
+type PostImageProps = ImageProps & {
   alt: string;
   src: string;
 };
 
-export function PostImage({ alt, src }: PostImageProps): JSX.Element {
+export function PostImage({ alt, src, ...rest }: PostImageProps): JSX.Element {
   return (
     <Image
+      {...rest}
       className="w-full object-cover"
       alt={alt}
       src={src}

@@ -35,7 +35,7 @@ export default function PostPage({ blog, source }: PostProps): JSX.Element {
       </Head>
       <Header />
       <MdxProvider {...context}>
-        <main className="relative mx-4 sm:mx-8">
+        <main className="markdown relative mx-4 sm:mx-8">
           <MDXRemote {...source} components={Components} />
         </main>
       </MdxProvider>
