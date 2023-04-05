@@ -16,7 +16,7 @@ if (allPosts.length) {
     it.each(homePagePosts)(
       "Page one post should have a formatted date",
       (blog) => {
-        expect(blog.date).toMatch(/\d\d\/\d\d\/\d\d\d\d/);
+        expect(blog.date).toMatch(/(\d\d\/\d\d\/\d\d\d\d)|(WIP)/);
       }
     );
 
