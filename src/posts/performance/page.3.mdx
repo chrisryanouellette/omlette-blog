@@ -1,0 +1,36 @@
+---
+title: "A Journey into Front End Performance"
+page title: "Critical Rendering Path"
+---
+
+<Contents />
+
+# Critical Rendering Path
+
+- [Resource Link](https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path)
+
+Let's define this section before diving into it. The critical rendering path is the steps that need to be taken to display pixels on the screen. This includes parsing the HTML, styling the page with CSS, and executing the JavaScript to add interactivity.
+
+We begin by downloading and parsing the HTML to begin to form the Document Object Model, or DOM. The parsed HTML may cause additional requests for CSS or JavaScript which may alter the layout of the DOM. As CSS is fetched and parsed it begins to form the CSS object model. The DOM and CSS object model form to create the render tree.
+
+## Document Object Model
+
+The browser starts parsing our HTML and begins to convert the elements into tokens. The tokens are either a start or end token, or the opening and closing tags of an element. Any attributes for an element are also converted to tokens. All of these tokens make up nodes and these nodes form the DOM.
+
+Understanding this is important since we can not finish our first paint until all the nodes in a document have been parsed. A few extra nodes may not have an impact but at a certain point will will be more performant to remove content that appears below the fold.
+
+## CSS Object Model
+
+The CSSOM is similar to the DOM but with major difference. The CSSOM is blocking which means that all other processing stops until the full CSSOM is fetched and parsed. The reason for this is CSS rules can override each other based on specificity. The browser has no way of knowing what style to apply until it knows all the rules and their specificity. Once the rules are determine the browser can form the CSSOM and begin painting the screen.
+
+Aside from reducing the amount of CSS on a page to increase performance, we can optimize our selectors as well. If we have two selectors `.foo` and `.bar .baz` the `.foo` is more performant because the browser can apply the properties in the class the moment it finds an element that contains the `.foo` class. While the `.bar .baz` class first needs to find an element with the `.baz` class then traverse up the DOM tree to find another element `.bar`.
+
+The article emphasizes that although this maybe a area to increase performance it is most likely not going to improve it much. Browser are very fast at parsing and applying selectors so make sure to measure first then optimize as needed.
+
+## Render Tree
+
+The render tree is the combination of the DOM and CSSOM. It contains all the visible elements within a page. It would not include anything in the `<head>` of the document or an element with `display: none`.
+
+## Layout
+
+<Navigation />

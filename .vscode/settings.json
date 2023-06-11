@@ -16,4 +16,7 @@
     "cSpell.words": [
       "Omlette"
     ],
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
 }
